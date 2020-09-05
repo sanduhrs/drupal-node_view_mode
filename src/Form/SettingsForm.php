@@ -49,8 +49,8 @@ class SettingsForm extends ConfigFormBase {
     $node_types = \Drupal::entityTypeManager()
       ->getStorage('node_type')
       ->loadMultiple();
-    foreach ($node_types as $bundle => $node_type) {
-      $form['view_mode_' . $bundle] = [
+    foreach ($node_types as $node_type) {
+      $form['view_mode_' . $node_type->id()] = [
         '#type' => 'select',
         '#title' => $this->t('@bundle view mode', ['@bundle' => $node_type->label()]),
         '#options' => $this->getOptions(),
@@ -64,9 +64,14 @@ class SettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $this->config('node_view_mode.settings')
-      ->set('view_mode', $form_state->getValue('view_mode'))
-      ->save();
+    $node_types = \Drupal::entityTypeManager()
+      ->getStorage('node_type')
+      ->loadMultiple();
+    foreach ($node_types as $node_type) {
+      $this->config('node_view_mode.settings')
+        ->set('view_mode_' . $node_type->id() , $form_state->getValue('view_mode_' . $node_type->id()))
+        ->save();
+    }
     parent::submitForm($form, $form_state);
   }
 

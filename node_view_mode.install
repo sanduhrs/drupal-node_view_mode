@@ -14,6 +14,7 @@ function node_view_mode_install() {
     ->loadMultiple();
   foreach ($node_types as $bundle => $node_type) {
     \Drupal::configFactory()->getEditable('node_view_mode.settings')
-      ->set('view_mode_' . $node_type->bundle(), 'full');
+      ->set('view_mode_' . $node_type->id(), 'full')
+      ->save();
   }
 }

@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * The node view mode module.
+ */
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function node_view_mode_node_type_insert(Drupal\Core\Entity\EntityInterface $entity) {
+  \Drupal::configFactory()->getEditable('node_view_mode.settings')
+    ->set('view_mode_' . $entity->id(), 'full');
+}

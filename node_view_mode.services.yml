@@ -1,0 +1,5 @@
+services:
+  node_view_mode.route_subscriber:
+    class: Drupal\node_view_mode\EventSubscriber\RouteSubscriber
+    tags:
+      - { name: event_subscriber }

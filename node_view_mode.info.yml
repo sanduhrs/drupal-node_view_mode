@@ -1,0 +1,7 @@
+name: Node View Mode
+type: module
+description: The node view mode module.
+package: Custom
+core: 8.x
+core_version_requirement: ^8 || ^9
+configure: node_view_mode.settings

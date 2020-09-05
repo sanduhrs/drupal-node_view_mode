@@ -1,0 +1,7 @@
+node_view_mode.settings:
+  path: 'admin/config/system/node-view-mode'
+  defaults:
+    _title: 'Node view modes'
+    _form: 'Drupal\node_view_mode\Form\SettingsForm'
+  requirements:
+    _permission: 'administer site configuration'
